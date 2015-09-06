@@ -1,0 +1,201 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://openlibrary-1059.appspot.com/_ah/api",
+  "name" : "book",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://openlibrary-1059.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "book.book.add" : {
+      "path" : "book/add",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "https://micro-environs-104602.appspot.com" ],
+      "clientIds" : [ "861251421548-51kvv9ktodvg3mm0asimjtdmacr4424a.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.openlibrary.BookEndPoint.addBook",
+      "request" : {
+        "parameters" : {
+          "name" : {
+            "type" : "string",
+            "required" : true
+          },
+          "author" : {
+            "type" : "string",
+            "required" : true
+          },
+          "genre" : {
+            "type" : "string",
+            "required" : true
+          },
+          "ageGroup" : {
+            "type" : "string",
+            "required" : true
+          },
+          "ISBN" : {
+            "type" : "string",
+            "required" : true
+          },
+          "price" : {
+            "type" : "string",
+            "required" : true
+          },
+          "numberOfCopiesAvailable" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "book.readall" : {
+      "path" : "readall",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "https://micro-environs-104602.appspot.com" ],
+      "clientIds" : [ "861251421548-51kvv9ktodvg3mm0asimjtdmacr4424a.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.openlibrary.BookEndPoint.readall",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "book.readmatching" : {
+      "path" : "readmatching",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "https://micro-environs-104602.appspot.com" ],
+      "clientIds" : [ "861251421548-51kvv9ktodvg3mm0asimjtdmacr4424a.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.openlibrary.BookEndPoint.readmatching",
+      "request" : {
+        "parameters" : {
+          "brand" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Book" : {
+        "id" : "Book",
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "$ref" : "Key"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "author" : {
+            "type" : "string"
+          },
+          "genre" : {
+            "type" : "string"
+          },
+          "ageGroup" : {
+            "type" : "string"
+          },
+          "price" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "numberOfCopiesAvailable" : {
+            "type" : "integer"
+          },
+          "wishList" : {
+            "type" : "boolean"
+          },
+          "isbn" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Key" : {
+        "id" : "Key",
+        "type" : "object",
+        "properties" : {
+          "kind" : {
+            "type" : "string"
+          },
+          "appId" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "parent" : {
+            "$ref" : "Key"
+          },
+          "complete" : {
+            "type" : "boolean"
+          },
+          "namespace" : {
+            "type" : "string"
+          }
+        }
+      },
+      "BookCollection" : {
+        "id" : "BookCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Book"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "org.openlibrary.BookEndPoint.addBook" : {
+      },
+      "org.openlibrary.BookEndPoint.readall" : {
+        "response" : {
+          "$ref" : "BookCollection"
+        }
+      },
+      "org.openlibrary.BookEndPoint.readmatching" : {
+        "response" : {
+          "$ref" : "BookCollection"
+        }
+      }
+    }
+  }
+}
