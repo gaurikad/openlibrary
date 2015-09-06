@@ -24,6 +24,21 @@
     "maxAge" : 0
   },
   "methods" : {
+    "book.readall" : {
+      "path" : "readall",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "https://micro-environs-104602.appspot.com" ],
+      "clientIds" : [ "861251421548-51kvv9ktodvg3mm0asimjtdmacr4424a.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.openlibrary.BookEndPoint.readall",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "book.book.add" : {
       "path" : "book/add",
       "httpMethod" : "PUT",
@@ -67,21 +82,6 @@
       },
       "response" : {
         "body" : "empty"
-      }
-    },
-    "book.readall" : {
-      "path" : "readall",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ "https://micro-environs-104602.appspot.com" ],
-      "clientIds" : [ "861251421548-51kvv9ktodvg3mm0asimjtdmacr4424a.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.openlibrary.BookEndPoint.readall",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
       }
     },
     "book.readmatching" : {
@@ -184,12 +184,12 @@
       }
     },
     "methods" : {
-      "org.openlibrary.BookEndPoint.addBook" : {
-      },
       "org.openlibrary.BookEndPoint.readall" : {
         "response" : {
           "$ref" : "BookCollection"
         }
+      },
+      "org.openlibrary.BookEndPoint.addBook" : {
       },
       "org.openlibrary.BookEndPoint.readmatching" : {
         "response" : {
